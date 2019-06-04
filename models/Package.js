@@ -32,7 +32,7 @@ const PackageSchema = new Schema({
     },
 
     duration: {
-        type: Number,
+        type: String,
         required: true,
     },
 
