@@ -75,4 +75,4 @@ const PackageSchema = new Schema({
 
 });
 
-module.exports = mongoose.model('packages', PackageSchema);
+module.exports = mongoose.model('package', PackageSchema);

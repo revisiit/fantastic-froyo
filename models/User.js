@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const packages = require('./Packages');
+const package = require('./Package');
 const Schema = mongoose.Schema;
 
 
