@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const User = require('./models/User');
 const Packages = require('./models/Packages');
 
-
 mongoose.connect('mongodb://localhost:27017/db', {
     useNewUrlParser: true
 });
@@ -15,6 +14,7 @@ mongoose.connection
 
 
 // TESTING!!!
+
 // const newpackages = new Packages({
 
 //     _id: new mongoose.Types.ObjectId(),
