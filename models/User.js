@@ -1,14 +1,16 @@
-const mongoose=require('mongoose');
-const Schema= mongoose.Schema;
+const mongoose = require('mongoose');
+const packages = require('./Packages');
+const Schema = mongoose.Schema;
 
-const UserSchema =new Schema({
-    
+
+const UserSchema = new Schema({
+
     first_name: {
 
         type: String,
         required: true,
         minlength: 4,
-        trim : true,
+        trim: true,
 
     },
 
@@ -28,32 +30,39 @@ const UserSchema =new Schema({
         unique: true,
         required: 'Email address is required',
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
-    
+
     },
 
     phone: {
-    
+
         type: Number,
-        minlength:9,
-        maxlength:11,
+        minlength: 9,
+        maxlength: 11,
         required: true,
 
     },
-    
-    password :{
+
+    password: {
 
         type: String,
-        default:'',
-    
+        default: '',
+
     },
 
-    isAdmin :{
-    
-        type : Boolean,
+    isAdmin: {
+
+        type: Boolean,
         default: false,
+
+    },
+
+    packages: {
+
+        type: Schema.Types.ObjectId,
+        ref: 'packages'
 
     }
 
 });
 
-module.exports= mongoose.model('user',UserSchema);
+module.exports = mongoose.model('user', UserSchema);
