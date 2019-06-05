@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const iternary = require('./Iternary');
 
 const PackageSchema = new Schema({
 
-    _id: Schema.Types.ObjectId,
+    package_id: Schema.Types.ObjectId,
 
     name: {
         type: String,
@@ -47,9 +48,9 @@ const PackageSchema = new Schema({
         data: Buffer,
     },
 
-    itenary: {
-        day: Number,
-        content: [String],
+    iternary: {
+        type: Schema.Types.ObjectId,
+        ref: 'iternary',
     },
 
     inclusion: {
@@ -66,11 +67,6 @@ const PackageSchema = new Schema({
         type: [String],
         required: true,
         default: undefined,
-    },
-
-    category: {
-        name: String,
-        packages: [String],
     }
 
 });

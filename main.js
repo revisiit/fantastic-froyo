@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const User = require('./models/User');
 const Package = require('./models/Package');
+const Iternary = require('./models/Iternary');
+const Category = require('./models/Category');
 
 mongoose.connect('mongodb://localhost:27017/db', {
     useNewUrlParser: true
@@ -13,37 +15,63 @@ mongoose.connection
     });
 
 
-// TESTING!!!
+// // TESTING!!!
 
-// const newpackages = new Package({
+// const newiternary = new Iternary({
 
-//     _id: new mongoose.Types.ObjectId(),
-//     name: 'Sanjay',
-//     description: 'Checking',
-//     location: {
-//         type: 'Point',
-//         coordinates: [102.333, 104.222]
-//     },
-//     duration: 5,
-//     conditions: ['Checking', '1', '2'],
+//     iternary_id: new mongoose.Types.ObjectId(),
+//     day: 7,
+//     content: ['iternary-1', 'iternary-2'],
+// })
 
-
-// });
-
-// newpackages.save(function (err, dataSaved) {
+// newiternary.save(function (err, dataSaved) {
 //     if (err) return console.log(err);
 
-//     const newuser = new User({
+//     const newpackages = new Package({
 
-//         first_name: 'Sanjay',
-//         email: 'sivasanjay8@gmail.com',
-//         phone: 9500006153,
-//         password: 'Hello',
-//         packages: newpackages._id,
+//         package_id: new mongoose.Types.ObjectId(),
+//         name: 'Sanjay',
+//         description: 'Checking',
+//         location: {
+//             type: 'Point',
+//             coordinates: [102.333, 104.222]
+//         },
+//         duration: 5,
+//         iternary: newiternary.iternary_id,
+//         conditions: ['Checking', '1', '2'],
+
+
 //     });
 
-//     newuser.save(function (err, dataSaved) {
+//     newpackages.save(function (err, dataSaved) {
 //         if (err) return console.log(err);
-//         console.log(dataSaved);
-//     });
+
+//         const newuser = new User({
+
+//             first_name: 'Sanjay',
+//             email: 'checking4@gmail.com',
+//             phone: 9500006153,
+//             password: 'Hello',
+//             packages: newpackages.package_id,
+//         });
+
+//         const newcategory = new Category({
+
+//             name: 'Category 1',
+//             packages: newpackages.package_id,
+
+
+//         })
+//         newuser.save(function (err, dataSaved) {
+//             if (err) return console.log(err);
+//             console.log(dataSaved);
+//         });
+
+//         newcategory.save(function (err, dataSaved) {
+//             if (err) return console.log(err);
+//             console.log(dataSaved);
+//         });
+
+//     })
+
 // })
