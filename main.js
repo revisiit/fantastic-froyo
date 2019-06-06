@@ -30,7 +30,7 @@ mongoose.connection
 //     const newpackages = new Package({
 
 //         package_id: new mongoose.Types.ObjectId(),
-//         name: 'Sanjay',
+//         name: 'Coorg',
 //         description: 'Checking',
 //         location: {
 //             type: 'Point',
@@ -49,29 +49,30 @@ mongoose.connection
 //         const newuser = new User({
 
 //             first_name: 'Sanjay',
-//             email: 'checking4@gmail.com',
+//             email: 'checking-8@gmail.com',
 //             phone: 9500006153,
 //             password: 'Hello',
 //             packages: newpackages.package_id,
 //         });
 
-//         const newcategory = new Category({
-
-//             name: 'Category 1',
-//             packages: newpackages.package_id,
-
-
-//         })
-//         newuser.save(function (err, dataSaved) {
+//         newuser.save(function (err, dataSaved1) {
 //             if (err) return console.log(err);
-//             console.log(dataSaved);
+//             console.log(dataSaved1);
 //         });
 
-//         newcategory.save(function (err, dataSaved) {
-//             if (err) return console.log(err);
-//             console.log(dataSaved);
-//         });
+// const newcategory = new Category({
 
-//     })
+//     name: 'Romance',
+//     packages:[newpackages],
+
+
+// })
+
+// newcategory.save(function (err, dataSaved2) {
+//     if (err) return console.log(err);
+//     console.log(dataSaved2);
+// });
+ 
+// })
 
 // })

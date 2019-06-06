@@ -6,7 +6,7 @@ const Category = new Schema({
 
     name: String,
     packages: {
-        type: Schema.Types.ObjectId,
+        type: [Schema.Types.ObjectId],
         ref: 'package',
     },
 
