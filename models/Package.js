@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const iternary = require('./Iternary');
+const Iternary = require('./Iternary');
 
 const PackageSchema = new Schema({
 
@@ -49,8 +49,8 @@ const PackageSchema = new Schema({
     },
 
     iternary: {
-        type: Schema.Types.ObjectId,
-        ref: 'iternary',
+        type: [Iternary.schema],
+        ref: 'Iternary',
     },
 
     inclusion: {

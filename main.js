@@ -19,9 +19,8 @@ mongoose.connection
 
 // const newiternary = new Iternary({
 
-//     iternary_id: new mongoose.Types.ObjectId(),
-//     day: 7,
-//     content: ['iternary-1', 'iternary-2'],
+//     day: 10,
+//     content: ['iternary-3', 'iternary-4'],
 // })
 
 // newiternary.save(function (err, dataSaved) {
@@ -29,7 +28,6 @@ mongoose.connection
 
 //     const newpackages = new Package({
 
-//         package_id: new mongoose.Types.ObjectId(),
 //         name: 'Coorg',
 //         description: 'Checking',
 //         location: {
@@ -37,42 +35,43 @@ mongoose.connection
 //             coordinates: [102.333, 104.222]
 //         },
 //         duration: 5,
-//         iternary: newiternary.iternary_id,
+//         iternary: [newiternary],
 //         conditions: ['Checking', '1', '2'],
 
 
-//     });
+//     })
 
-//     newpackages.save(function (err, dataSaved) {
+//     newpackages.save(function (err, dataSaved3) {
 //         if (err) return console.log(err);
 
 //         const newuser = new User({
 
 //             first_name: 'Sanjay',
-//             email: 'checking-8@gmail.com',
+//             email: 'checking-18@gmail.com',
 //             phone: 9500006153,
 //             password: 'Hello',
-//             packages: newpackages.package_id,
+
 //         });
+//         console.log(dataSaved3);
 
 //         newuser.save(function (err, dataSaved1) {
 //             if (err) return console.log(err);
 //             console.log(dataSaved1);
 //         });
 
-// const newcategory = new Category({
+//         const newcategory = new Category({
 
-//     name: 'Romance',
-//     packages:[newpackages],
+//             name: 'Romance',
+//             packages: [newpackages],
 
 
-// })
+//         })
 
-// newcategory.save(function (err, dataSaved2) {
-//     if (err) return console.log(err);
-//     console.log(dataSaved2);
-// });
- 
-// })
+//         newcategory.save(function (err, dataSaved2) {
+//             if (err) return console.log(err);
+//             console.log(dataSaved2);
+//         });
+
+//     })
 
 // })

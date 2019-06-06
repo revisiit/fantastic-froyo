@@ -44,10 +44,6 @@ const UserSchema = new Schema({
         default: false,
     },
 
-    packages: {
-        type: Schema.Types.ObjectId,
-        ref: 'packages'
-    }
 
 });
 
