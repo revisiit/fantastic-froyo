@@ -24,7 +24,10 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
-require('./routes/apiroutes.js')(app);
+require('./routes/AllPackages.js')(app);
+require('./routes/Packages.js')(app);
+require('./routes/AllCategory.js')(app);
+require('./routes/Category')(app);
 
 app.listen(3000, () => {
     console.log('Connected to port 3000');
