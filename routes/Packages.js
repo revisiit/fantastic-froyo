@@ -3,4 +3,6 @@ module.exports = (app) => {
 
     app.get('/api/v1/packages/:packageId', data.findOnePackage);
 
+    app.get('/api/v1/packages', data.AllPackages);
+
 }

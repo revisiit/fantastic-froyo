@@ -11,3 +11,15 @@ exports.Categories = (req, res) => {
     });
 
 };
+
+exports.AllCategories = (req, res) => {
+    Category.find()
+        .then(allcategory => {
+            res.send(allcategory);
+        }).catch(err => {
+            res.send({
+                message: err.message,
+            })
+        })
+
+};

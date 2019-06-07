@@ -24,9 +24,8 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
-require('./routes/AllPackages.js')(app);
+
 require('./routes/Packages.js')(app);
-require('./routes/AllCategory.js')(app);
 require('./routes/Category')(app);
 
 app.listen(3000, () => {

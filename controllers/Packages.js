@@ -27,3 +27,15 @@ exports.findOnePackage = (req, res) => {
         })
 
 };
+
+exports.AllPackages = (req, res) => {
+    Package.find()
+        .then(packages => {
+            res.send(packages);
+        }).catch(err => {
+            res.send({
+                message: err.message,
+            })
+        })
+
+};
