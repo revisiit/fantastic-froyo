@@ -24,13 +24,6 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
-app.get('/api/v1', (req, res) => {
-    res.json({
-        "name": "sanjay",
-        "checking": 1
-    });
-})
-
 require('./routes/apiroutes.js')(app);
 
 app.listen(3000, () => {
