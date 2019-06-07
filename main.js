@@ -1,18 +1,51 @@
 const mongoose = require('mongoose');
-const User = require('./models/User');
-const Package = require('./models/Package');
-const Iternary = require('./models/Iternary');
-const Category = require('./models/Category');
+const express = require('express');
+const bodyParser = require('body-parser');
+const dbConfig = require('./config/databaseconfig');
 
-mongoose.connect('mongodb://localhost:27017/db', {
-    useNewUrlParser: true
-});
-mongoose.set('useCreateIndex', true);
-mongoose.connection
-    .once('open', () => console.log('Connected to the database'))
-    .on('error', (err) => {
-        console.log('ERROR :', err)
+const app = express();
+
+mongoose.Promise = global.Promise;
+
+mongoose.connect(dbConfig.url, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+
+}).then(() => {
+    console.log("Connected to the Database");
+}).catch(err => {
+    console.log('Could not connect, ERROR:', err);
+})
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}))
+
+app.use(bodyParser.json());
+
+
+app.get('/api/v1', (req, res) => {
+    res.json({
+        "name": "sanjay",
+        "checking": 1
     });
+})
+
+require('./routes/apiroutes.js')(app);
+
+app.listen(3000, () => {
+    console.log('Connected to port 3000');
+})
+
+
+
+
+
+
+
+
+
+
 
 
 // // TESTING!!!
