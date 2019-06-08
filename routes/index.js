@@ -11,8 +11,8 @@ router.get('/', (req, res) => {
   res.send(data)
 })
 
-router.all('/package', packageRouter)
+router.use('/package', packageRouter)
 
-router.all('/category', categoryRouter)
+router.use('/category', categoryRouter)
 
 module.exports = router
