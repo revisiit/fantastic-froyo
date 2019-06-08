@@ -3,7 +3,7 @@ const Package = require('../models/Package')
 const Iternary = require('../models/Iternary')
 const Category = require('../models/Category')
 
-exports.findOnePackage = (req, res) => {
+exports.getOnePackage = (req, res) => {
   Package.findById(req.params.packageId)
     .then(packagebyid => {
       if (!packagebyid) {
@@ -25,7 +25,7 @@ exports.findOnePackage = (req, res) => {
     })
 }
 
-exports.AllPackages = (req, res) => {
+exports.getAllPackages = (req, res) => {
   Package.find()
     .then(packages => {
       res.send(packages)

@@ -1,7 +1,10 @@
-module.exports = app => {
-  const data = require('../controllers/Category')
+const { Router } = requrie('express')
+const controller = require('../controllers/Category')
 
-  app.get('/api/v1/categories', data.Categories)
+const router = Router()
 
-  app.get('/api/v1/category', data.AllCategories)
-}
+router.get('/', controller.getAllCategories)
+
+router.get('/:categoryId', controller.getOneCategory)
+
+module.exports = router

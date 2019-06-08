@@ -1,7 +1,10 @@
-module.exports = app => {
-  const data = require('../controllers/Packages')
+const { Router } = requrie('express')
+const controller = require('../controllers/Packages')
 
-  app.get('/api/v1/packages/:packageId', data.findOnePackage)
+const router = Router()
 
-  app.get('/api/v1/packages', data.AllPackages)
-}
+router.get('/', controller.getAllPackages)
+
+router.get('/:packageId', controller.getOnePackage)
+
+module.exports = router

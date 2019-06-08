@@ -3,21 +3,26 @@ const Package = require('../models/Package')
 const Iternary = require('../models/Iternary')
 const Category = require('../models/Category')
 
-exports.Categories = (req, res) => {
+exports.getAllCategories = (req, res) => {
   Category.find({}, 'name', function(err, categories) {
     if (err) return err
     res.send(categories)
   })
 }
 
-exports.AllCategories = (req, res) => {
-  Category.find()
-    .then(allcategory => {
-      res.send(allcategory)
+exports.getOneCategory = (req, res) => {
+  Category.findById(req.params.categoryId)
+    .then(category => {
+      if (!category) {
+        res.send({
+          message: `Category with id ${req.params.categoryId} was not found`,
+        })
+      }
+      res.send(category)
     })
     .catch(err => {
       res.send({
-        message: err.message,
+        message: `Category with id ${req.params.categoryId} was not found`,
       })
     })
 }

@@ -1,7 +1,9 @@
 const mongoose = require('mongoose')
 const express = require('express')
 const bodyParser = require('body-parser')
+
 const dbConfig = require('./config/databaseconfig')
+const apiRoutes = require('./routes')
 
 const app = express()
 
@@ -27,8 +29,7 @@ app.use(
 
 app.use(bodyParser.json())
 
-require('./routes/Packages.js')(app)
-require('./routes/Category')(app)
+app.all('/api/v1', apiRoutes)
 
 app.listen(3000, () => {
   console.log('Connected to port 3000')
