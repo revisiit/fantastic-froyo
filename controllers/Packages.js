@@ -32,7 +32,7 @@ exports.getAllPackages = (req, res) => {
     })
     .catch(err => {
       res.send({
-        message: err.message,
+        message: 'all' + err.message,
       })
     })
 }

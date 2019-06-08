@@ -4,8 +4,15 @@ const categoryRouter = require('./Category')
 
 const router = Router()
 
-router.all('/packages', packageRouter)
+router.get('/', (req, res) => {
+  const data = {
+    message: 'Welcome to reVisiit API',
+  }
+  res.send(data)
+})
 
-router.all('/categories', categoryRouter)
+router.all('/package', packageRouter)
 
-module.export = router
+router.all('/category', categoryRouter)
+
+module.exports = router

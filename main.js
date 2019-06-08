@@ -29,10 +29,10 @@ app.use(
 
 app.use(bodyParser.json())
 
-app.all('/api/v1', apiRoutes)
+app.use('/api/v1', apiRoutes)
 
 app.listen(3000, () => {
-  console.log('Connected to port 3000')
+  console.log('Server running on http://127.0.0.1:3000')
 })
 
 // // TESTING!!!
