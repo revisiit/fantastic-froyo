@@ -1,47 +1,38 @@
-const mongoose = require('mongoose');
-const express = require('express');
-const bodyParser = require('body-parser');
-const dbConfig = require('./config/databaseconfig');
+const mongoose = require('mongoose')
+const express = require('express')
+const bodyParser = require('body-parser')
+const dbConfig = require('./config/databaseconfig')
 
-const app = express();
+const app = express()
 
-mongoose.Promise = global.Promise;
+mongoose.Promise = global.Promise
 
-mongoose.connect(dbConfig.url, {
+mongoose
+  .connect(dbConfig.url, {
     useNewUrlParser: true,
     useCreateIndex: true,
+  })
+  .then(() => {
+    console.log('Connected to the Database')
+  })
+  .catch(err => {
+    console.log('Could not connect, ERROR:', err)
+  })
 
-}).then(() => {
-    console.log("Connected to the Database");
-}).catch(err => {
-    console.log('Could not connect, ERROR:', err);
-})
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  }),
+)
 
-app.use(bodyParser.urlencoded({
-    extended: true
-}))
+app.use(bodyParser.json())
 
-app.use(bodyParser.json());
-
-
-
-require('./routes/Packages.js')(app);
-require('./routes/Category')(app);
+require('./routes/Packages.js')(app)
+require('./routes/Category')(app)
 
 app.listen(3000, () => {
-    console.log('Connected to port 3000');
+  console.log('Connected to port 3000')
 })
-
-
-
-
-
-
-
-
-
-
-
 
 // // TESTING!!!
 
@@ -65,7 +56,6 @@ app.listen(3000, () => {
 //         duration: 5,
 //         iternary: [newiternary],
 //         conditions: ['Checking', '1', '2'],
-
 
 //     })
 
@@ -91,7 +81,6 @@ app.listen(3000, () => {
 
 //             name: 'Romance',
 //             packages: [newpackages],
-
 
 //         })
 

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon main.js",
-    "pretty": "prettier . --config prettier.config.js"
+    "pretty": "prettier --config prettier.config.js --write **/*.js"
   },
   "repository": {
     "type": "git",
