@@ -26,13 +26,8 @@ exports.getOnePackage = (req, res) => {
 }
 
 exports.getAllPackages = (req, res) => {
-  Package.find()
-    .then(packages => {
-      res.send(packages)
-    })
-    .catch(err => {
-      res.send({
-        message: 'all' + err.message,
-      })
-    })
+  Package.find({}, '-__v', function(err, allpackages) {
+    if (err) return console.log(err)
+    res.send(allpackages)
+  })
 }
