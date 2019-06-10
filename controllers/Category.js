@@ -12,7 +12,12 @@ exports.getAllCategories = (req, res) => {
 
 exports.getOneCategory = (req, res) => {
   Category.findById(req.params.categoryId)
-    .select('-__v')
+    .select({
+      __v: 0,
+      'packages.iternary._id': 0,
+      'packages.iternary.__v': 0,
+      'packages.__v': 0,
+    })
     .then(category => {
       if (!category) {
         res.send({

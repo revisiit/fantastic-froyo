@@ -5,6 +5,11 @@ const Category = require('../models/Category')
 
 exports.getOnePackage = (req, res) => {
   Package.findById(req.params.packageId)
+    .select({
+      __v: 0,
+      'iternary._id': 0,
+      'iternary.__v': 0,
+    })
     .then(packagebyid => {
       if (!packagebyid) {
         res.send({
@@ -26,8 +31,16 @@ exports.getOnePackage = (req, res) => {
 }
 
 exports.getAllPackages = (req, res) => {
-  Package.find({}, '-__v', function(err, allpackages) {
-    if (err) return console.log(err)
-    res.send(allpackages)
-  })
+  Package.find(
+    {},
+    {
+      '-__v': 0,
+      'iternary._id': 0,
+      'iternary.__v': 0,
+    },
+    function(err, allpackages) {
+      if (err) return console.log(err)
+      res.send(allpackages)
+    },
+  )
 }
