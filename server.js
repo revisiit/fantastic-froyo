@@ -2,29 +2,19 @@ const mongoose = require('mongoose')
 const express = require('express')
 const bodyParser = require('body-parser')
 
+// TODO: Restructure this as per Github comments
 const User = require('./models/User') // Just for testing purpose
 const Package = require('./models/Package') // Just for testing purpose
 const Iternary = require('./models/Itenary') // Just for testing purpose
 const Category = require('./models/Category') // Just for testing purpose
 
-const dbConfig = require('./config/databaseconfig')
+const { connect } = require('./database')
 const apiRoutes = require('./routes')
 
 const app = express()
 
-mongoose.Promise = global.Promise
-
-mongoose
-  .connect(dbConfig.url, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-  })
-  .then(() => {
-    console.log('Connected to the Database')
-  })
-  .catch(err => {
-    console.log('Could not connect, ERROR:', err)
-  })
+// Connect to Mongo Database
+connect()
 
 app.use(
   bodyParser.urlencoded({
