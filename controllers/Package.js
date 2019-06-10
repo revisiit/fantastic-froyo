@@ -26,14 +26,15 @@ exports.getOnePackage = (req, res) => {
 }
 
 exports.getAllPackages = (req, res) => {
-  Package.find(
-    {},
-    {
-      'iternary._id': 0,
-    },
-    function(err, allpackages) {
+  Package.find({})
+    .select({
+      _id: 1,
+      name: 1,
+      description: 1,
+      images: 1,
+    })
+    .exec(function(err, allpackages) {
       if (err) return console.log(err)
       res.send(allpackages)
-    },
-  )
+    })
 }
