@@ -34,7 +34,7 @@ exports.getAllPackages = (req, res) => {
   Package.find(
     {},
     {
-      '-__v': 0,
+      __v: 0,
       'iternary._id': 0,
       'iternary.__v': 0,
     },

@@ -2,6 +2,11 @@ const mongoose = require('mongoose')
 const express = require('express')
 const bodyParser = require('body-parser')
 
+const User = require('./models/User')
+const Package = require('./models/Package')
+const Iternary = require('./models/Iternary')
+const Category = require('./models/Category')
+
 const dbConfig = require('./config/databaseconfig')
 const apiRoutes = require('./routes')
 
@@ -35,61 +40,58 @@ app.listen(3000, () => {
   console.log('Server running on http://127.0.0.1:3000')
 })
 
-// // TESTING!!!
+// TESTING!!!
 
 // const newiternary = new Iternary({
 
-//     day: 10,
-//     content: ['iternary-3', 'iternary-4'],
+//   day: 10,
+//   content: ['iternary-3', 'iternary-4'],
 // })
 
 // newiternary.save(function (err, dataSaved) {
+//   if (err) return console.log(err);
+
+//   const newpackages = new Package({
+
+//     name: 'Coorg',
+//     description: 'Checking',
+//     location: 'Chennai',
+//     duration: 5,
+//     iternary: [newiternary],
+//     conditions: ['Checking', '1', '2'],
+
+//   })
+
+//   newpackages.save(function (err, dataSaved3) {
 //     if (err) return console.log(err);
 
-//     const newpackages = new Package({
+//     const newuser = new User({
 
-//         name: 'Coorg',
-//         description: 'Checking',
-//         location: {
-//             type: 'Point',
-//             coordinates: [102.333, 104.222]
-//         },
-//         duration: 5,
-//         iternary: [newiternary],
-//         conditions: ['Checking', '1', '2'],
+//       first_name: 'Sanjay',
+//       email: 'checking-23@gmail.com',
+//       phone: 9500006153,
+//       password: 'Hello',
 
-//     })
+//     });
+//     console.log(dataSaved3);
 
-//     newpackages.save(function (err, dataSaved3) {
-//         if (err) return console.log(err);
+//     newuser.save(function (err, dataSaved1) {
+//       if (err) return console.log(err);
+//       console.log(dataSaved1);
+//     });
 
-//         const newuser = new User({
+//     const newcategory = new Category({
 
-//             first_name: 'Sanjay',
-//             email: 'checking-18@gmail.com',
-//             phone: 9500006153,
-//             password: 'Hello',
-
-//         });
-//         console.log(dataSaved3);
-
-//         newuser.save(function (err, dataSaved1) {
-//             if (err) return console.log(err);
-//             console.log(dataSaved1);
-//         });
-
-//         const newcategory = new Category({
-
-//             name: 'Romance',
-//             packages: [newpackages],
-
-//         })
-
-//         newcategory.save(function (err, dataSaved2) {
-//             if (err) return console.log(err);
-//             console.log(dataSaved2);
-//         });
+//       name: 'Romance',
+//       packages: [newpackages],
 
 //     })
+
+//     newcategory.save(function (err, dataSaved2) {
+//       if (err) return console.log(err);
+//       console.log(dataSaved2);
+//     });
+
+//   })
 
 // })
