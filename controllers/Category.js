@@ -3,9 +3,11 @@ const { Category } = require('../models/index')
 exports.getAllCategories = (req, res) => {
   Category.find({})
     .select('name')
-    .exec(function(err, categories) {
-      if (err) return err
+    .then(categories => {
       res.send(categories)
+    })
+    .catch(err => {
+      if (err) console.log(err)
     })
 }
 

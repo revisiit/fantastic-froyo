@@ -6,7 +6,7 @@ mongoose.Promise = global.Promise
 module.exports = {
   connect: () => {
     mongoose
-      .connect(config.local_url, {
+      .connect(config.mlab_url, {
         useNewUrlParser: true,
         useCreateIndex: true,
       })

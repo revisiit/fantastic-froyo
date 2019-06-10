@@ -33,8 +33,10 @@ exports.getAllPackages = (req, res) => {
       description: 1,
       images: 1,
     })
-    .exec(function(err, allpackages) {
-      if (err) return console.log(err)
+    .then(allpackages => {
       res.send(allpackages)
+    })
+    .catch(err => {
+      if (err) console.log(err)
     })
 }
