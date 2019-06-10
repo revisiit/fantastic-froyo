@@ -1,11 +1,9 @@
 const mongoose = require('mongoose')
-const Schema = mongoose.Schema
-const Iternary = require('./Iternary')
+const { Schema } = mongoose
+const Iternary = require('./Itenary')
 
 const PackageSchema = new Schema(
   {
-    package_id: Schema.Types.ObjectId,
-
     name: {
       type: String,
       required: true,

@@ -1,14 +1,9 @@
-const User = require('../models/User')
-const Package = require('../models/Package')
-const Iternary = require('../models/Iternary')
-const Category = require('../models/Category')
+const { Package } = require('../models/index')
 
 exports.getOnePackage = (req, res) => {
   Package.findById(req.params.packageId)
     .select({
-      __v: 0,
       'iternary._id': 0,
-      'iternary.__v': 0,
     })
     .then(packagebyid => {
       if (!packagebyid) {
@@ -34,9 +29,7 @@ exports.getAllPackages = (req, res) => {
   Package.find(
     {},
     {
-      __v: 0,
       'iternary._id': 0,
-      'iternary.__v': 0,
     },
     function(err, allpackages) {
       if (err) return console.log(err)

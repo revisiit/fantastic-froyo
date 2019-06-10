@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const package = require('./Package')
-const Schema = mongoose.Schema
+const { Schema } = mongoose
 
 const UserSchema = new Schema(
   {
@@ -8,7 +8,6 @@ const UserSchema = new Schema(
       type: String,
       required: true,
       minlength: 4,
-      trim: true,
     },
 
     last_name: {
