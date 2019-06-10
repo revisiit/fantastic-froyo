@@ -12,6 +12,7 @@ exports.getAllCategories = (req, res) => {
 
 exports.getOneCategory = (req, res) => {
   Category.findById(req.params.categoryId)
+    .select('-__v')
     .then(category => {
       if (!category) {
         res.send({
