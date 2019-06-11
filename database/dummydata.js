@@ -1,11 +1,7 @@
-// TODO: Restructure this as per Github comments
-const User = require('../models/User') // Just for testing purpose
-const Package = require('../models/Package') // Just for testing purpose
-const Iternary = require('../models/Itenary') // Just for testing purpose
-const Category = require('../models/Category') // Just for testing purpose
+const { User, Package, Iternary, Category } = require('../models')
 
 module.exports = {
-  TestingData: () => {
+  addDummyData: () => {
     const newiternary = new Iternary({
       day: 10,
       content: ['iternary-3', 'iternary-4'],

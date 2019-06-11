@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
+
 const config = require('./config')
+const { addDummyData } = require('./dummydata')
 
 mongoose.Promise = global.Promise
 
@@ -29,4 +31,5 @@ module.exports = {
           })
       })
   },
+  addDummyData,
 }
