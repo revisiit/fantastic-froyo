@@ -1,6 +1,6 @@
 const { Category } = require('../models/index')
 
-exports.getAllCategories = (req, res) => {
+exports.AllCategories = (req, res) => {
   Category.find({})
     .select('name')
     .then(categories => {
@@ -11,7 +11,7 @@ exports.getAllCategories = (req, res) => {
     })
 }
 
-exports.getOneCategory = (req, res) => {
+exports.OneCategory = (req, res) => {
   Category.findById(req.params.categoryId)
     .select({
       'packages.iternary._id': 0,
