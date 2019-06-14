@@ -12,7 +12,7 @@ exports.postUser = (req, res) => {
     if (err) {
       res.send({
         success: 'false',
-        Error: err,
+        error: err,
       })
     } else {
       res.send({

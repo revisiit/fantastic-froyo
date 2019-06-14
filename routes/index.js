@@ -1,7 +1,7 @@
 const { Router } = require('express')
-const getpackageRouter = require('./Packages')
-const getcategoryRouter = require('./Category')
-const postuserRouter = require('./Post')
+const PackageRouter = require('./Packages')
+const CategoryRouter = require('./Category')
+const UserRouter = require('./User')
 
 const router = Router()
 
@@ -12,10 +12,10 @@ router.get('/', (req, res) => {
   res.send(data)
 })
 
-router.use('/package', getpackageRouter)
+router.use('/package', PackageRouter)
 
-router.use('/category', getcategoryRouter)
+router.use('/category', CategoryRouter)
 
-router.use('/post', postuserRouter)
+router.use('/user', UserRouter)
 
 module.exports = router
