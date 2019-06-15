@@ -1,4 +1,4 @@
-const { User } = require('../models/index')
+const { User } = require('../models')
 
 exports.postUser = (req, res) => {
   var user = new User({
@@ -8,15 +8,16 @@ exports.postUser = (req, res) => {
     phone: req.body.phone,
     password: req.body.password,
   })
+
   user.save(function(err) {
     if (err) {
       res.send({
-        success: 'false',
+        success: false,
         error: err,
       })
     } else {
       res.send({
-        success: 'true',
+        success: true,
         entity: user,
       })
     }

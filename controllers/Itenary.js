@@ -1,8 +1,25 @@
 const { Itenary } = require('../models')
 
 exports.postItenary = (req, res) => {
-  var newitenary = new Itenary({
-    day: req.body.day,
-    content: req.body.content,
+  const { day, content } = req.body
+
+  const itenary = new Itenary({
+    day,
+    content,
   })
+
+  itenary
+    .save()
+    .then(_ => {
+      res.send({
+        success: true,
+        entity: itenary,
+      })
+    })
+    .catch(err => {
+      res.send({
+        success: false,
+        error: err,
+      })
+    })
 }
