@@ -40,3 +40,33 @@ exports.getAllPackages = (req, res) => {
       if (err) console.log(err)
     })
 }
+
+exports.postPackage = (req, res) => {
+  var packages = new Package({
+    name: req.body.name,
+    description: req.body.description,
+    price: req.body.price,
+    location: req.body.location,
+    duration: req.body.duration,
+    activites: req.body.activites,
+    images: req.body.images,
+    iternary: req.body.iternary,
+    category: req.body.category,
+    inclusions: req.body.inclusions,
+    exclusions: req.body.exclusions,
+    conditions: req.body.conditions,
+  })
+  packages.save(function(err) {
+    if (err) {
+      res.send({
+        success: 'false',
+        error: err,
+      })
+    } else {
+      res.send({
+        success: 'true',
+        entity: packages,
+      })
+    }
+  })
+}

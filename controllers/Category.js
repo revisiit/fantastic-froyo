@@ -1,6 +1,6 @@
 const { Category } = require('../models/index')
 
-exports.AllCategories = (req, res) => {
+exports.getAllCategories = (req, res) => {
   Category.find({})
     .select('name')
     .then(categories => {
@@ -11,7 +11,7 @@ exports.AllCategories = (req, res) => {
     })
 }
 
-exports.OneCategory = (req, res) => {
+exports.getOneCategory = (req, res) => {
   Category.findById(req.params.categoryId)
     .select({
       'packages.iternary._id': 0,
@@ -29,4 +29,24 @@ exports.OneCategory = (req, res) => {
         message: `Category with id ${req.params.categoryId} was not found`,
       })
     })
+}
+
+exports.postCategory = (req, res) => {
+  const category = new Category({
+    name: req.body.name,
+    packages: req.body.packages,
+  })
+  category.save(err => {
+    if (err) {
+      res.send({
+        sucess: 'false',
+        error: err,
+      })
+    } else {
+      res.send({
+        sucess: 'true',
+        entity: category,
+      })
+    }
+  })
 }
