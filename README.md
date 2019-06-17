@@ -13,7 +13,7 @@ Install the dependencies : `npm install`
   Starts a server running at https://localhost:3000
   
 ## Database 
-By default, the template is configured to connect to a MongoDB database using Mongoose. It first attempts to connect to a local mongo server, if there is no local mongo server running, it connects to a mLab server. 
+By default, the template is configured to connect to a local MongoDB database using Mongoose. It first attempts to connect to a local mongo server, if there is no local mongo server running, it connects to a mLab server. 
 
 ## File Structure 
 The backend of revisiit consists of 4 major folders and a server.js file which run the server.
