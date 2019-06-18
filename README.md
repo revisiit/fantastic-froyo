@@ -10,7 +10,7 @@ Install the dependencies : `npm install`
 ## Working on the project 
   Run the development task : `npm start`
 
-  Starts a server running at https://localhost:3000
+  Starts a server running at https://localhost:3000/api/v1
   
 ## Database 
 By default, the template is configured to connect to a local MongoDB database using Mongoose. It first attempts to connect to a local mongo server, if there is no local mongo server running, it connects to a mLab server. 
