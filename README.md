@@ -5,6 +5,8 @@
 ### Setting up the Project
 Move into the backend directory: `cd fantastic-froyo`
 
+If you just want to use the stable version: `git checkout master`
+
 Install the dependencies : `npm install`
 
 ## Working on the project 
