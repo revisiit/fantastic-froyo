@@ -1,4 +1,4 @@
-const { Package } = require('../models/index')
+const { Package, Itenary } = require('../models/index')
 
 exports.getOnePackage = (req, res) => {
   Package.findById(req.params.packageId)
@@ -50,13 +50,29 @@ exports.postPackage = (req, res) => {
     duration: req.body.duration,
     activites: req.body.activites,
     images: req.body.images,
-    iternary: req.body.iternary,
+    iternary_id: req.body.iternary,
     category: req.body.category,
     inclusions: req.body.inclusions,
     exclusions: req.body.exclusions,
     conditions: req.body.conditions,
   })
-  packages.save(function(err) {
+  const id_iternary = req.body.iternary
+  const iternarydetails = Itenary.findById(id_iternary)
+  const newpackage = new Package({
+    name: req.body.name,
+    description: req.body.description,
+    price: req.body.price,
+    location: req.body.location,
+    duration: req.body.duration,
+    activites: req.body.activites,
+    images: req.body.images,
+    iternary: iternarydetails,
+    category: req.body.category,
+    inclusions: req.body.inclusions,
+    exclusions: req.body.exclusions,
+    conditions: req.body.conditions,
+  })
+  newpackage.save(function(err) {
     if (err) {
       res.send({
         success: 'false',
@@ -65,7 +81,7 @@ exports.postPackage = (req, res) => {
     } else {
       res.send({
         success: 'true',
-        entity: packages,
+        entity: newpackage,
       })
     }
   })
