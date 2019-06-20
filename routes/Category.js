@@ -7,4 +7,6 @@ router.get('/all', controller.getAllCategories)
 
 router.get('/:categoryId', controller.getOneCategory)
 
+router.post('/post', controller.postCategory)
+
 module.exports = router

@@ -50,39 +50,40 @@ exports.postPackage = (req, res) => {
     duration: req.body.duration,
     activites: req.body.activites,
     images: req.body.images,
-    iternary_id: req.body.iternary,
+    itenary: req.body.itenary,
     category: req.body.category,
     inclusions: req.body.inclusions,
     exclusions: req.body.exclusions,
     conditions: req.body.conditions,
   })
-  const id_iternary = req.body.iternary
-  const iternarydetails = Itenary.findById(id_iternary)
-  const newpackage = new Package({
-    name: req.body.name,
-    description: req.body.description,
-    price: req.body.price,
-    location: req.body.location,
-    duration: req.body.duration,
-    activites: req.body.activites,
-    images: req.body.images,
-    iternary: iternarydetails,
-    category: req.body.category,
-    inclusions: req.body.inclusions,
-    exclusions: req.body.exclusions,
-    conditions: req.body.conditions,
-  })
-  newpackage.save(function(err) {
-    if (err) {
-      res.send({
-        success: 'false',
-        error: err,
-      })
-    } else {
-      res.send({
-        success: 'true',
-        entity: newpackage,
-      })
-    }
+  const id_iternary = req.body.itenary
+  Itenary.findById(id_iternary).then(iternarydetails => {
+    const newpackage = new Package({
+      name: req.body.name,
+      description: req.body.description,
+      price: req.body.price,
+      location: req.body.location,
+      duration: req.body.duration,
+      activites: req.body.activites,
+      images: req.body.images,
+      itenary: iternarydetails,
+      category: req.body.category,
+      inclusions: req.body.inclusions,
+      exclusions: req.body.exclusions,
+      conditions: req.body.conditions,
+    })
+    newpackage.save(function(err) {
+      if (err) {
+        res.send({
+          success: 'false',
+          error: err,
+        })
+      } else {
+        res.send({
+          success: 'true',
+          entity: newpackage,
+        })
+      }
+    })
   })
 }

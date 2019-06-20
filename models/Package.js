@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
-const Iternary = require('./Itenary')
+const Itenary = require('./Itenary')
 const Category = require('./Category')
 
 const PackageSchema = new Schema(
@@ -40,8 +40,8 @@ const PackageSchema = new Schema(
       data: Buffer,
     },
 
-    iternary: {
-      type: [Iternary.schema],
+    itenary: {
+      type: [Itenary.schema],
       ref: 'Iternary',
     },
 

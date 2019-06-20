@@ -1,4 +1,4 @@
-const { Category } = require('../models/index')
+const { Category, Package } = require('../models/index')
 
 exports.getAllCategories = (req, res) => {
   Category.find({})
@@ -36,17 +36,24 @@ exports.postCategory = (req, res) => {
     name: req.body.name,
     packages: req.body.packages,
   })
-  category.save(err => {
-    if (err) {
-      res.send({
-        sucess: 'false',
-        error: err,
-      })
-    } else {
-      res.send({
-        sucess: 'true',
-        entity: category,
-      })
-    }
+  const package_id = req.body.packages
+  Package.findById(package_id).then(packagesdetails => {
+    const newcategory = new Category({
+      name: req.body.name,
+      packages: packagesdetails,
+    })
+    newcategory.save(function(err) {
+      if (err) {
+        res.send({
+          success: 'false',
+          error: err,
+        })
+      } else {
+        res.send({
+          success: 'true',
+          entity: newcategory,
+        })
+      }
+    })
   })
 }
