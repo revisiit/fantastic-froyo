@@ -2,7 +2,6 @@ const { Category, Package } = require('../models/index')
 
 exports.getAllCategories = (req, res) => {
   Category.find({})
-    .select('name')
     .then(categories => {
       res.send(categories)
     })
@@ -11,23 +10,29 @@ exports.getAllCategories = (req, res) => {
     })
 }
 
+const catNotFound = (res, id) =>
+  res.send({
+    message: `Category with id ${id} was not found`,
+  })
+
 exports.getOneCategory = (req, res) => {
-  Category.findById(req.params.categoryId)
-    .select({
-      'packages.iternary._id': 0,
-    })
+  const id = req.params.categoryId
+  Category.findById(id)
+    .select()
     .then(category => {
       if (!category) {
-        res.send({
-          message: `Category with id ${req.params.categoryId} was not found`,
-        })
+        catNotFound(res, id)
       }
-      res.send(category)
+
+      Package.find({ categories: id }).then(packages => {
+        res.send({
+          ...category.toObject(),
+          packages,
+        })
+      })
     })
     .catch(err => {
-      res.send({
-        message: `Category with id ${req.params.categoryId} was not found`,
-      })
+      catNotFound(res, id)
     })
 }
 

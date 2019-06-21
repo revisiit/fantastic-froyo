@@ -1,6 +1,7 @@
 const { Package, Itenary } = require('../models/index')
 
 exports.getOnePackage = (req, res) => {
+  // TODO: Here fetch itenaries the same way category is fetched
   Package.findById(req.params.packageId)
     .select({
       'iternary._id': 0,
@@ -57,6 +58,7 @@ exports.postPackage = ({ body }, res) => {
     conditions: body.conditions,
   })
 
+  // TODO: Make this similar to category. No need for finding itenary objects.
   Itenary.findById(package.itenary).then(itenary => {
     package.itenary = itenary
     package.save(function(err) {
