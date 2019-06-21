@@ -5,10 +5,6 @@ const package = require('./Package')
 const Category = new Schema(
   {
     name: String,
-    packages: {
-      type: [package.schema],
-      ref: 'package',
-    },
   },
   {
     versionKey: false,

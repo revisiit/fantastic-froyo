@@ -32,28 +32,24 @@ exports.getOneCategory = (req, res) => {
 }
 
 exports.postCategory = (req, res) => {
-  const category = new Category({
-    name: req.body.name,
-    packages: req.body.packages,
+  const { name } = req.body
+
+  const newCat = new Category({
+    name,
   })
-  const package_id = req.body.packages
-  Package.findById(package_id).then(packagesdetails => {
-    const newcategory = new Category({
-      name: req.body.name,
-      packages: packagesdetails,
+
+  newCat
+    .save()
+    .then(() => {
+      res.send({
+        success: true,
+        entity: newCat,
+      })
     })
-    newcategory.save(function(err) {
-      if (err) {
-        res.send({
-          success: 'false',
-          error: err,
-        })
-      } else {
-        res.send({
-          success: 'true',
-          entity: newcategory,
-        })
-      }
+    .catch(err => {
+      res.send({
+        success: false,
+        error: err,
+      })
     })
-  })
 }

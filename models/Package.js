@@ -40,15 +40,19 @@ const PackageSchema = new Schema(
       data: Buffer,
     },
 
-    itenary: {
-      type: [Itenary.schema],
-      ref: 'Iternary',
-    },
+    itenary: [
+      {
+        type: Itenary.schema,
+        ref: 'Iternary',
+      },
+    ],
 
-    category: {
-      type: [Category.schema],
-      ref: 'Category',
-    },
+    categories: [
+      {
+        type: Schema.ObjectId,
+        ref: 'Category',
+      },
+    ],
 
     inclusion: {
       type: [String],

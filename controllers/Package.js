@@ -41,47 +41,34 @@ exports.getAllPackages = (req, res) => {
     })
 }
 
-exports.postPackage = (req, res) => {
-  var packages = new Package({
-    name: req.body.name,
-    description: req.body.description,
-    price: req.body.price,
-    location: req.body.location,
-    duration: req.body.duration,
-    activites: req.body.activites,
-    images: req.body.images,
-    itenary: req.body.itenary,
-    category: req.body.category,
-    inclusions: req.body.inclusions,
-    exclusions: req.body.exclusions,
-    conditions: req.body.conditions,
+exports.postPackage = ({ body }, res) => {
+  const package = new Package({
+    name: body.name,
+    description: body.description,
+    price: body.price,
+    location: body.location,
+    duration: body.duration,
+    activites: body.activites,
+    images: body.images,
+    itenary: body.itenary,
+    categories: body.categories,
+    inclusions: body.inclusions,
+    exclusions: body.exclusions,
+    conditions: body.conditions,
   })
-  const id_iternary = req.body.itenary
-  Itenary.findById(id_iternary).then(iternarydetails => {
-    const newpackage = new Package({
-      name: req.body.name,
-      description: req.body.description,
-      price: req.body.price,
-      location: req.body.location,
-      duration: req.body.duration,
-      activites: req.body.activites,
-      images: req.body.images,
-      itenary: iternarydetails,
-      category: req.body.category,
-      inclusions: req.body.inclusions,
-      exclusions: req.body.exclusions,
-      conditions: req.body.conditions,
-    })
-    newpackage.save(function(err) {
+
+  Itenary.findById(package.itenary).then(itenary => {
+    package.itenary = itenary
+    package.save(function(err) {
       if (err) {
         res.send({
-          success: 'false',
+          success: false,
           error: err,
         })
       } else {
         res.send({
-          success: 'true',
-          entity: newpackage,
+          success: true,
+          entity: package,
         })
       }
     })
