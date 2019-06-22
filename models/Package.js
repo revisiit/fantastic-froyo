@@ -42,7 +42,7 @@ const PackageSchema = new Schema(
 
     itenary: [
       {
-        type: Itenary.schema,
+        type: Schema.ObjectId,
         ref: 'Iternary',
       },
     ],
