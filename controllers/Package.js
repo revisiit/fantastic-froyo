@@ -1,4 +1,4 @@
-const { Package, Itenary, Category } = require('../models/index')
+const { Package, Itenary, Category } = require('../models')
 
 exports.getOnePackage = (req, res) => {
   // TODO: Here fetch itenaries the same way category is fetched
@@ -9,23 +9,31 @@ exports.getOnePackage = (req, res) => {
           message: 'Package with that id was not found ' + req.params.packageId,
         })
       }
-      Category.findById(packagebyid.categories)
+      Category.find({
+        _id: {
+          $in: packagebyid.categories,
+        },
+      })
         .select({
           _id: 0,
         })
-        .then(categorydetails => {
-          Itenary.findById(packagebyid.itenary)
+        .then(categories => {
+          Itenary.find({
+            _id: {
+              $in: packagebyid.itenary,
+            },
+          })
             .select({
               _id: 0,
             })
-            .then(itenarydetails => {
-              if (!itenarydetails || !categorydetails) {
+            .then(itenary => {
+              if (!itenary || !categories) {
                 res.send('Iternary or category not found')
               } else
                 res.send({
                   ...packagebyid.toObject(),
-                  itenary: itenarydetails,
-                  category: categorydetails,
+                  itenary,
+                  categories,
                 })
             })
         })
@@ -74,17 +82,18 @@ exports.postPackage = ({ body }, res) => {
     conditions: body.conditions,
   })
   // TODO: Make this similar to category. No need for finding itenary objects.
-  package.save(function(err) {
-    if (err) {
-      res.send({
-        success: false,
-        error: err,
-      })
-    } else {
+  package
+    .save()
+    .then(() => {
       res.send({
         success: true,
-        entity: package,
+        error: package,
       })
-    }
-  })
+    })
+    .catch(err => {
+      res.send({
+        success: true,
+        entity: err,
+      })
+    })
 }

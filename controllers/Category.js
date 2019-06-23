@@ -1,4 +1,4 @@
-const { Category, Package } = require('../models/index')
+const { Category, Package } = require('../models')
 
 exports.getAllCategories = (req, res) => {
   Category.find({})
@@ -24,7 +24,11 @@ exports.getOneCategory = (req, res) => {
         catNotFound(res, id)
       }
 
-      Package.find({ categories: id }).then(packages => {
+      Package.find({
+        categories: {
+          $in: id,
+        },
+      }).then(packages => {
         res.send({
           ...category.toObject(),
           packages,

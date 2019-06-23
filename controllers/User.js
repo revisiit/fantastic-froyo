@@ -9,17 +9,18 @@ exports.postUser = (req, res) => {
     password: req.body.password,
   })
 
-  user.save(function(err) {
-    if (err) {
-      res.send({
-        success: false,
-        error: err,
-      })
-    } else {
+  user
+    .save()
+    .then(() => {
       res.send({
         success: true,
-        entity: user,
+        error: user,
       })
-    }
-  })
+    })
+    .catch(err => {
+      res.send({
+        success: false,
+        entity: err,
+      })
+    })
 }
