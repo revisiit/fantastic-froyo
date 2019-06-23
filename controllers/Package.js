@@ -26,15 +26,12 @@ exports.getOnePackage = (req, res) => {
             .select({
               _id: 0,
             })
-            .then(itenary => {
-              if (!itenary || !categories) {
-                res.send('Iternary or category not found')
-              } else
-                res.send({
-                  ...packagebyid.toObject(),
-                  itenary,
-                  categories,
-                })
+            .then(itenaries => {
+              res.send({
+                ...packagebyid.toObject(),
+                itenaries,
+                categories,
+              })
             })
         })
     })
@@ -87,13 +84,13 @@ exports.postPackage = ({ body }, res) => {
     .then(() => {
       res.send({
         success: true,
-        error: package,
+        entity: package,
       })
     })
     .catch(err => {
       res.send({
         success: true,
-        entity: err,
+        error: err,
       })
     })
 }

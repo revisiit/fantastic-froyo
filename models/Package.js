@@ -40,7 +40,7 @@ const PackageSchema = new Schema(
       data: Buffer,
     },
 
-    itenary: [
+    itenaries: [
       {
         type: Schema.ObjectId,
         ref: 'Iternary',

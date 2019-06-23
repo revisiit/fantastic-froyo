@@ -25,9 +25,7 @@ exports.getOneCategory = (req, res) => {
       }
 
       Package.find({
-        categories: {
-          $in: id,
-        },
+        categories: id,
       }).then(packages => {
         res.send({
           ...category.toObject(),

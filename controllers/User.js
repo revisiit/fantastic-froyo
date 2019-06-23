@@ -14,13 +14,13 @@ exports.postUser = (req, res) => {
     .then(() => {
       res.send({
         success: true,
-        error: user,
+        entity: user,
       })
     })
     .catch(err => {
       res.send({
         success: false,
-        entity: err,
+        error: err,
       })
     })
 }
