@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const express = require('express')
 const bodyParser = require('body-parser')
+const session = require('express-session')
+const MongoStore = require('connect-mongo')(session)
 
 const { connect, addDummyData } = require('./database')
 const apiRoutes = require('./routes')
@@ -29,6 +31,17 @@ app.use(
 app.use(bodyParser.json())
 
 app.use('/api/v1', apiRoutes)
+
+app.use(
+  session({
+    secret: 'Notsureaboutitsfunctionality',
+    resave: true,
+    saveUninitialized: false, //Couldnt understand the purpose of it
+    store: new MongoStore({
+      url: 'mongodb://Sanjay:password99@ds161804.mlab.com:61804/visitdb',
+    }),
+  }),
+)
 
 // Uncomment next line if you want to add dummy data to db
 // addDummyData()
