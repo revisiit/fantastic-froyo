@@ -19,7 +19,12 @@ exports.postUser = (req, res) => {
         .then(() => {
           res.send({
             success: true,
-            entity: user,
+            entity: {
+              Name: user.first_name,
+              LastName: user.last_name,
+              IsAdmin: user.IsAdmin,
+              Phone: user.phone,
+            },
           })
         })
         .catch(err => {
@@ -44,7 +49,12 @@ exports.login = (req, res) => {
           req.session.userId = userdetails._id
           res.send({
             isLoggedIn: true,
-            entity: userdetails,
+            entity: {
+              Name: userdetails.first_name,
+              LastName: userdetails.last_name,
+              IsAdmin: userdetails.IsAdmin,
+              Phone: userdetails.phone,
+            },
           })
         } else
           res.send({
@@ -61,7 +71,12 @@ exports.isAuthenticated = (req, res) => {
     User.findById(userId).then(user => {
       res.send({
         isAuthenticated: true,
-        user,
+        userinfo: {
+          Name: user.first_name,
+          LastName: user.last_name,
+          IsAdmin: user.IsAdmin,
+          Phone: user.phone,
+        },
       })
     })
   } else {
