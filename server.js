@@ -30,8 +30,6 @@ app.use(
 
 app.use(bodyParser.json())
 
-app.use('/api/v1', apiRoutes)
-
 app.use(
   session({
     secret: 'Notsureaboutitsfunctionality',
@@ -42,6 +40,8 @@ app.use(
     }),
   }),
 )
+
+app.use('/api/v1', apiRoutes)
 
 // Uncomment next line if you want to add dummy data to db
 // addDummyData()

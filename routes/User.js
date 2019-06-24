@@ -5,6 +5,10 @@ const router = Router()
 
 router.post('/', controller.postUser)
 
-router.post('/login', controller.Login)
+router.post('/login', controller.login)
+
+router.post('/isAuthenticated', controller.isAuthenticated)
+
+router.post('/logout', controller.logout)
 
 module.exports = router

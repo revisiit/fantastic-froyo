@@ -32,27 +32,58 @@ exports.postUser = (req, res) => {
   })
 }
 
-exports.Login = (req, res) => {
+exports.login = (req, res) => {
+  const { email, password } = req.body
+
   User.findOne({
-    email: req.body.email,
+    email,
   }).then(userdetails => {
     if (userdetails)
-      bcrypt.compare(
-        req.body.password,
-        userdetails.password,
-        (err, verified) => {
-          if (verified) {
-            // req.session.userId = userdetails._id  --ERROR--
-            res.send({
-              success: true,
-              entity: userdetails,
-            })
-          } else
-            res.send({
-              success: false,
-              error: err,
-            })
-        },
-      )
+      bcrypt.compare(password, userdetails.password, (err, verified) => {
+        if (verified) {
+          req.session.userId = userdetails._id
+          res.send({
+            isLoggedIn: true,
+            entity: userdetails,
+          })
+        } else
+          res.send({
+            isLoggedIn: false,
+            error: err,
+          })
+      })
   })
+}
+
+exports.isAuthenticated = (req, res) => {
+  const { userId } = req.session
+  if (userId) {
+    User.findById(userId).then(user => {
+      res.send({
+        isAuthenticated: true,
+        user,
+      })
+    })
+  } else {
+    res.send({
+      isAuthenticated: false,
+    })
+  }
+}
+
+exports.logout = (req, res) => {
+  if (req.session) {
+    req.session.destroy(err => {
+      if (err) {
+        res.send({
+          success: false,
+          error: err,
+        })
+      } else {
+        res.send({
+          success: true,
+        })
+      }
+    })
+  }
 }
