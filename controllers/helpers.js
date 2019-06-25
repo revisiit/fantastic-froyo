@@ -1,8 +1,8 @@
 const { User } = require('../models')
 module.exports = {
-  FilterUser: function(user) {
-    User.findOne(user).then(() => {
-      delete user.password, delete user._id
+  ilterUser: function(user) {
+    User.findById(user).then(userdetails => {
+      delete userdetails.password, delete userdetails._id, userdetails
     })
   },
 }
