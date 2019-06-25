@@ -1,5 +1,6 @@
 const { User } = require('../models')
 const bcrypt = require('bcryptjs')
+const { FilterUser } = require('./helpers')
 
 exports.postUser = (req, res) => {
   var user = new User({
@@ -47,15 +48,11 @@ exports.login = (req, res) => {
       bcrypt.compare(password, userdetails.password, (err, verified) => {
         if (verified) {
           req.session.userId = userdetails._id
-          res.send({
-            isLoggedIn: true,
-            entity: {
-              Name: userdetails.first_name,
-              LastName: userdetails.last_name,
-              IsAdmin: userdetails.IsAdmin,
-              Phone: userdetails.phone,
-            },
-          })
+          FilterUser(userdetails),
+            res.send({
+              isLoggedIn: true,
+              entity: userdetails,
+            })
         } else
           res.send({
             isLoggedIn: false,
