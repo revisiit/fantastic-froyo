@@ -20,12 +20,7 @@ exports.postUser = (req, res) => {
         .then(() => {
           res.send({
             success: true,
-            entity: {
-              Name: user.first_name,
-              LastName: user.last_name,
-              IsAdmin: user.IsAdmin,
-              Phone: user.phone,
-            },
+            entity: filterUser(user.toObject()),
           })
         })
         .catch(err => {
@@ -43,14 +38,14 @@ exports.login = (req, res) => {
 
   User.findOne({
     email,
-  }).then(userdetails => {
-    if (userdetails)
-      bcrypt.compare(password, userdetails.password, (err, verified) => {
+  }).then(user => {
+    if (user)
+      bcrypt.compare(password, user.password, (err, verified) => {
         if (verified) {
-          req.session.userId = userdetails._id
+          req.session.userId = user._id
           res.send({
             isLoggedIn: true,
-            entity: filterUser(userdetails._id),
+            entity: filterUser(user.toObject()),
           })
         } else
           res.send({
@@ -67,12 +62,7 @@ exports.isAuthenticated = (req, res) => {
     User.findById(userId).then(user => {
       res.send({
         isAuthenticated: true,
-        userinfo: {
-          Name: user.first_name,
-          LastName: user.last_name,
-          IsAdmin: user.IsAdmin,
-          Phone: user.phone,
-        },
+        entity: filterUser(user.toObject()),
       })
     })
   } else {
