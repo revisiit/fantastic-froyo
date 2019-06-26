@@ -1,6 +1,6 @@
 const { User } = require('../models')
 const bcrypt = require('bcryptjs')
-const { filterUser } = require('./helpers')
+const { filterUser, failure, success } = require('./helpers')
 
 exports.postUser = (req, res) => {
   var user = new User({
@@ -18,16 +18,10 @@ exports.postUser = (req, res) => {
       user
         .save()
         .then(() => {
-          res.send({
-            success: true,
-            entity: filterUser(user.toObject()),
-          })
+          res.send(success(filterUser(user.toObject())))
         })
         .catch(err => {
-          res.send({
-            success: false,
-            error: err,
-          })
+          res.send(failure(err))
         })
     })
   })
@@ -76,10 +70,7 @@ exports.logout = (req, res) => {
   if (req.session) {
     req.session.destroy(err => {
       if (err) {
-        res.send({
-          success: false,
-          error: err,
-        })
+        res.send(failure(err))
       } else {
         res.send({
           success: true,

@@ -1,4 +1,5 @@
 const { Category, Package } = require('../models')
+const { success, failure } = require('./helpers')
 
 exports.getAllCategories = (req, res) => {
   Category.find({})
@@ -48,15 +49,9 @@ exports.postCategory = (req, res) => {
   newCat
     .save()
     .then(() => {
-      res.send({
-        success: true,
-        entity: newCat,
-      })
+      res.send(success(newCat))
     })
     .catch(err => {
-      res.send({
-        success: false,
-        error: err,
-      })
+      res.send(failure(err))
     })
 }

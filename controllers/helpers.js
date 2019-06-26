@@ -4,4 +4,18 @@ module.exports = {
     delete user._id
     return user
   },
+
+  success: function(data) {
+    return {
+      success: true,
+      entity: data,
+    }
+  },
+
+  failure: function(err) {
+    return {
+      success: false,
+      error: err,
+    }
+  },
 }

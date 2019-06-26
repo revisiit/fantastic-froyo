@@ -1,4 +1,5 @@
 const { Package, Itenary, Category } = require('../models')
+const { success, failure } = require('./helpers')
 
 exports.getOnePackage = (req, res) => {
   // TODO: Here fetch itenaries the same way category is fetched
@@ -82,15 +83,9 @@ exports.postPackage = ({ body }, res) => {
   package
     .save()
     .then(() => {
-      res.send({
-        success: true,
-        entity: package,
-      })
+      res.send(success(package))
     })
     .catch(err => {
-      res.send({
-        success: true,
-        error: err,
-      })
+      res.send(failure(err))
     })
 }

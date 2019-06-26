@@ -1,4 +1,5 @@
 const { Itenary } = require('../models')
+const { success, failure } = require('./helpers')
 
 exports.postItenary = (req, res) => {
   const { day, content } = req.body
@@ -11,15 +12,9 @@ exports.postItenary = (req, res) => {
   itenary
     .save()
     .then(_ => {
-      res.send({
-        success: true,
-        entity: itenary,
-      })
+      res.send(success(itenary))
     })
     .catch(err => {
-      res.send({
-        success: false,
-        error: err,
-      })
+      res.send(failure(err))
     })
 }

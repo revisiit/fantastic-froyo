@@ -4,7 +4,10 @@ const package = require('./Package')
 
 const Category = new Schema(
   {
-    name: String,
+    name: {
+      type: String,
+      required: true,
+    },
   },
   {
     versionKey: false,
