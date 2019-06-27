@@ -1,8 +1,8 @@
-const { Category } = require('../models/index')
+const { Category, Package } = require('../models')
+const { success, failure } = require('./helpers')
 
 exports.getAllCategories = (req, res) => {
   Category.find({})
-    .select('name')
     .then(categories => {
       res.send(categories)
     })
@@ -11,22 +11,47 @@ exports.getAllCategories = (req, res) => {
     })
 }
 
+const catNotFound = (res, id) =>
+  res.send({
+    message: `Category with id ${id} was not found`,
+  })
+
 exports.getOneCategory = (req, res) => {
-  Category.findById(req.params.categoryId)
-    .select({
-      'packages.iternary._id': 0,
-    })
+  const id = req.params.categoryId
+  Category.findById(id)
+    .select()
     .then(category => {
       if (!category) {
-        res.send({
-          message: `Category with id ${req.params.categoryId} was not found`,
-        })
+        catNotFound(res, id)
       }
-      res.send(category)
+
+      Package.find({
+        categories: id,
+      }).then(packages => {
+        res.send({
+          ...category.toObject(),
+          packages,
+        })
+      })
     })
     .catch(err => {
-      res.send({
-        message: `Category with id ${req.params.categoryId} was not found`,
-      })
+      catNotFound(res, id)
+    })
+}
+
+exports.postCategory = (req, res) => {
+  const { name } = req.body
+
+  const newCat = new Category({
+    name,
+  })
+
+  newCat
+    .save()
+    .then(() => {
+      res.send(success(newCat))
+    })
+    .catch(err => {
+      res.send(failure(err))
     })
 }
