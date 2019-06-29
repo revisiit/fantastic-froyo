@@ -6,7 +6,7 @@ const ItenaryRouter = require('./Itenary')
 
 const router = Router()
 
-router.get('/', (req, res) => {
+router.all('/', (req, res) => {
   const data = {
     message: 'Welcome to reVisiit API',
   }

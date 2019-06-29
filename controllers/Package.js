@@ -1,7 +1,7 @@
 const { Package, Itenary, Category } = require('../models')
 const { success, failure } = require('./helpers')
 
-exports.getOnePackage = (req, res) => {
+;(exports.getOnePackage = (req, res, next) => {
   // TODO: Here fetch itenaries the same way category is fetched
   Package.findById(req.params.packageId)
     .then(packagebyid => {
@@ -46,7 +46,11 @@ exports.getOnePackage = (req, res) => {
         message: 'Error retriveing the package with id ' + req.params.packageId,
       })
     })
-}
+  next()
+}),
+  (req, res) => {
+    console.log('Hello')
+  }
 
 exports.getAllPackages = (req, res) => {
   Package.find({})
