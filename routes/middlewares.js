@@ -24,4 +24,11 @@ module.exports = {
     // make sure you call next in the middelware
     next()
   },
+
+  log: function(req, res, next) {
+    console.log('Requested Method:', req.method)
+    console.log('Requested URL:', req.originalUrl)
+    console.log('Time :', new Date())
+    next()
+  },
 }

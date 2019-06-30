@@ -46,7 +46,6 @@ exports.getOnePackage = (req, res, next) => {
         message: 'Error retriveing the package with id ' + req.params.packageId,
       })
     })
-  next()
 }
 
 exports.getAllPackages = (req, res) => {
