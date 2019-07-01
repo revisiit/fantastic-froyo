@@ -19,12 +19,12 @@ router.all('/', middlewares.hello, middlewares.time, (req, res) => {
   res.send(data)
 })
 
-router.use('/package', middlewares.log, PackageRouter)
+router.use('/package', PackageRouter)
 
-router.use('/category', middlewares.log, CategoryRouter)
+router.use('/category', CategoryRouter)
 
-router.use('/user', middlewares.log, UserRouter)
+router.use('/user', UserRouter)
 
-router.use('/itenary', middlewares.log, ItenaryRouter)
+router.use('/itenary', ItenaryRouter)
 
 module.exports = router

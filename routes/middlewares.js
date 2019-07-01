@@ -6,6 +6,8 @@
  * and you don't want the route controller to be invoked.
  */
 
+const { User } = require('../models')
+
 module.exports = {
   /**
    * Just prints hello in the console
@@ -30,5 +32,21 @@ module.exports = {
     console.log('Requested URL:', req.originalUrl)
     console.log('Time :', new Date())
     next()
+  },
+
+  AdminAuth: function(req, res, next) {
+    const { userId } = req.session.userId
+    User.findById(userId)
+      .then(user => {
+        if (user.isAdmin == true) {
+          console.log('Its Admin')
+          next()
+        } else {
+          next()
+        }
+      })
+      .catch(err => {
+        res.send(err)
+      })
   },
 }

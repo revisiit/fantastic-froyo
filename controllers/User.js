@@ -50,7 +50,7 @@ exports.login = (req, res) => {
   })
 }
 
-exports.isAuthenticated = (req, res) => {
+exports.isAuthenticated = (req, res, next) => {
   const { userId } = req.session
   if (userId) {
     User.findById(userId).then(user => {

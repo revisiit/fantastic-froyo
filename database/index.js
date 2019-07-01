@@ -13,17 +13,19 @@ module.exports = {
         useCreateIndex: true,
       })
       .then(() => {
-        console.log('Connected to the Local Database.')
+        console.log('Connected to mLab Database.')
       })
       .catch(err => {
-        console.log('Could not connect to local database.\nAttempting mLab.\n')
+        console.log(
+          'Could not connect to local database.\nAttempting Local Database.\n',
+        )
         mongoose
-          .connect(config.mlab_url, {
+          .connect(config.local_url, {
             useNewUrlParser: true,
             useCreateIndex: true,
           })
           .then(() => {
-            console.log('Connected to mLab Database.')
+            console.log('Connected to the Local Database.')
           })
           .catch(err => {
             console.log('Failed to connect to both databases, quitting server.')
