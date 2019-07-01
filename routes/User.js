@@ -8,12 +8,10 @@ router.post('/', controller.postUser)
 
 router.post('/login', controller.login)
 
-router.post(
-  '/isAuthenticated',
-  middlewares.AdminAuth,
-  controller.isAuthenticated,
-)
+router.post('/isAuthenticated', controller.isAuthenticated)
 
 router.post('/logout', controller.logout)
+
+router.get('/alluser', middlewares.AdminAuth, controller.getAllUser)
 
 module.exports = router

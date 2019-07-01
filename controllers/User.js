@@ -9,6 +9,7 @@ exports.postUser = (req, res) => {
     email: req.body.email,
     phone: req.body.phone,
     password: req.body.password,
+    isAdmin: req.body.isAdmin,
   })
 
   bcrypt.genSalt(10, (err, salt) => {
@@ -78,4 +79,14 @@ exports.logout = (req, res) => {
       }
     })
   }
+}
+
+exports.getAllUser = (req, res) => {
+  User.find({})
+    .then(allusers => {
+      res.send(allusers)
+    })
+    .catch(err => {
+      res.send('Error in fetching Details')
+    })
 }

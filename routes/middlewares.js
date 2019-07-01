@@ -35,14 +35,13 @@ module.exports = {
   },
 
   AdminAuth: function(req, res, next) {
-    const { userId } = req.session.userId
+    const { userId } = req.session
     User.findById(userId)
       .then(user => {
         if (user.isAdmin == true) {
-          console.log('Its Admin')
           next()
         } else {
-          next()
+          res.redirect('/')
         }
       })
       .catch(err => {
