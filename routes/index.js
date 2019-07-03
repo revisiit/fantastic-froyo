@@ -3,6 +3,7 @@ const PackageRouter = require('./Packages')
 const CategoryRouter = require('./Category')
 const UserRouter = require('./User')
 const ItenaryRouter = require('./Itenary')
+const SearchRouter = require('./Search')
 const middlewares = require('./middlewares')
 
 const router = Router()
@@ -26,5 +27,7 @@ router.use('/category', CategoryRouter)
 router.use('/user', UserRouter)
 
 router.use('/itenary', ItenaryRouter)
+
+router.use('/search', SearchRouter)
 
 module.exports = router
