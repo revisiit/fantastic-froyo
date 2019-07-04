@@ -27,6 +27,9 @@ module.exports = {
     next()
   },
 
+  /**
+   * Logs the request on the console
+   */
   log: function(req, res, next) {
     console.log('Requested Method:', req.method)
     console.log('Requested URL:', req.originalUrl)
@@ -49,3 +52,20 @@ module.exports = {
       })
   },
 }
+
+// isAuthenticatinon
+
+// const session_id = req.cookie.connect_sid
+// find session_id in sessions table => user_id
+// user_id => user.isAdmin
+
+// res.send()
+
+// isLoggedIn
+// user -> authenticated
+// create new entry -> session._id
+// res.cookie('connect_sid', session_id) //
+// res.send('Logged In')
+
+// browser:
+//   SET_COOKIE connect_sid=session_id

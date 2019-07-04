@@ -1,29 +1,30 @@
 const { Package } = require('../models')
+const { filterResult } = require('./helpers')
 
 exports.searchItem = (req, res) => {
   var item = req.body.item
-  Package.find({
-    $text: {
-      $search: item,
+  Package.find(
+    {
+      $text: {
+        $search: item,
+      },
     },
-
-    // **** EFFICIENT SORTING METHOD ****
-
-    // }, {
-    //     score: {
-    //         $meta: "textScore"
-    //     }
-    // })
-    // .sort({
-    //     score: {
-    //         $meta: "textScore"
-    //     }
-  })
+    {
+      score: {
+        $meta: 'textScore',
+      },
+    },
+  )
+    .sort({
+      score: {
+        $meta: 'textScore',
+      },
+    })
     .select({
       _id: 0,
     })
-    .then(data => {
-      res.send(data)
+    .then(results => {
+      res.send(results)
     })
     .catch(err => {
       res.send(err)
