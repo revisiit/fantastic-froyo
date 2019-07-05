@@ -69,6 +69,11 @@ const PackageSchema = new Schema(
       required: true,
       default: undefined,
     },
+    slug: {
+      type: String,
+      required: true,
+      unique: true,
+    },
   },
   {
     versionKey: false,
