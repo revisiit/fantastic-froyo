@@ -9,6 +9,7 @@ const PackageSchema = new Schema(
       type: String,
       required: true,
       trim: true,
+      unique: true,
       minlength: 2,
     },
 
@@ -69,10 +70,12 @@ const PackageSchema = new Schema(
       required: true,
       default: undefined,
     },
+
     slug: {
       type: String,
-      required: true,
       unique: true,
+      required: true,
+      dropDups: true,
     },
   },
   {
