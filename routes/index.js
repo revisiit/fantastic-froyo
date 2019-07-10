@@ -3,10 +3,17 @@ const PackageRouter = require('./Packages')
 const CategoryRouter = require('./Category')
 const UserRouter = require('./User')
 const ItenaryRouter = require('./Itenary')
+const SearchRouter = require('./Search')
+const middlewares = require('./middlewares')
 
 const router = Router()
 
-router.get('/', (req, res) => {
+/**
+ * Just showing you an example how you can keep chaining middelwares.
+ *  And we should always keep midddlewares before route controllers.
+ * delete this when you need
+ */
+router.all('/', middlewares.hello, middlewares.time, (req, res) => {
   const data = {
     message: 'Welcome to reVisiit API',
   }
@@ -20,5 +27,7 @@ router.use('/category', CategoryRouter)
 router.use('/user', UserRouter)
 
 router.use('/itenary', ItenaryRouter)
+
+router.use('/search', SearchRouter)
 
 module.exports = router

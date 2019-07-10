@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const express = require('express')
 const bodyParser = require('body-parser')
 const session = require('express-session')
+const middlewares = require('./routes/middlewares')
 const MongoStore = require('connect-mongo')(session)
 
 const { connect, addDummyData } = require('./database')
@@ -41,7 +42,13 @@ app.use(
   }),
 )
 
+app.use(middlewares.log)
+
 app.use('/api/v1', apiRoutes)
+
+app.get('/', (req, res) => {
+  res.send('Server functional. Go to /api/v1.')
+})
 
 // Uncomment next line if you want to add dummy data to db
 // addDummyData()

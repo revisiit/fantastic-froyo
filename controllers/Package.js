@@ -1,9 +1,9 @@
 const { Package, Itenary, Category } = require('../models')
 const { success, failure } = require('./helpers')
 
-exports.getOnePackage = (req, res) => {
+exports.getOnePackage = (req, res, next) => {
   // TODO: Here fetch itenaries the same way category is fetched
-  Package.findById(req.params.packageId)
+  Package.findOne({ slug: req.params.slug })
     .then(packagebyid => {
       if (!packagebyid) {
         res.send({
@@ -65,7 +65,12 @@ exports.getAllPackages = (req, res) => {
 }
 
 exports.postPackage = ({ body }, res) => {
-  const package = new Package({
+  const slug = body.name
+    .split(' ')
+    .join('-')
+    .toLowerCase()
+  const name = body.name
+  const packagedetails = new Package({
     name: body.name,
     description: body.description,
     price: body.price,
@@ -78,14 +83,19 @@ exports.postPackage = ({ body }, res) => {
     inclusions: body.inclusions,
     exclusions: body.exclusions,
     conditions: body.conditions,
+    slug,
   })
-  // TODO: Make this similar to category. No need for finding itenary objects.
-  package
-    .save()
-    .then(() => {
-      res.send(success(package))
-    })
-    .catch(err => {
-      res.send(failure(err))
-    })
+  Package.findOne({ name: name }).then(package => {
+    if (package) res.send('Package already exists')
+    else {
+      packagedetails
+        .save()
+        .then(() => {
+          res.send(success(packagedetials))
+        })
+        .catch(err => {
+          res.send(failure(err))
+        })
+    }
+  })
 }
