@@ -21,17 +21,16 @@ module.exports = {
 
     // .send contains the message to be sent to the registered user and send the mail using nodemailer
 
-    email
-      .send({
-        template: 'Welcome',
-        message: {
-          to: 'sivasanjay7@gmail.com',
-          subject: 'Welcome to Visiit',
-        },
-        locals: {
-          name: user.first_name,
-        },
-      })
+    Email.send({
+      template: 'Welcome',
+      message: {
+        to: 'sivasanjay7@gmail.com',
+        subject: 'Welcome to Visiit',
+      },
+      locals: {
+        name: user.first_name,
+      },
+    })
       .then(info => {
         console.log('Email sent:' + info.response)
       })
