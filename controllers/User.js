@@ -1,6 +1,7 @@
 const { User } = require('../models')
 const bcrypt = require('bcryptjs')
 const { filterUser, failure, success } = require('./helpers')
+const nodemailer = require('nodemailer')
 
 exports.postUser = (req, res) => {
   var user = new User({
@@ -16,14 +17,40 @@ exports.postUser = (req, res) => {
     bcrypt.hash(user.password, salt, (err, hash) => {
       if (err) return err
       else user.password = hash
-      user
-        .save()
-        .then(() => {
-          res.send(success(filterUser(user.toObject())))
+      user.save().then(user => {
+        req.session.userId = user._id
+        // res.send(success(filterUser(user.toObject())))
+        res.redirect('/api/v1')
+
+        // Storing the sender email details
+
+        var transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            user: 'sivasanjay7@gmail.com',
+            pass: 'Vishali99',
+          },
         })
-        .catch(err => {
-          res.send(failure(err))
+
+        // mailOptions contains the message to be sent to the user registered
+
+        var mailOptions = {
+          from: 'sivasanjay7@gmail.com',
+          to: user.email,
+          subject: 'Registration Succes',
+          text: `Welcome ${user.first_name}`,
+        }
+
+        // sendMail to send the mail
+
+        transporter.sendMail(mailOptions, function(error, info) {
+          if (error) {
+            console.log(error)
+          } else {
+            console.log('Email sent: ' + info.response)
+          }
         })
+      })
     })
   })
 }
