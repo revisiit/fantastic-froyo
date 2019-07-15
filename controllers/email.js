@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer')
-const email = require('email-templates')
+const Email = require('email-templates')
 
 // Storing the sender email details
 
@@ -13,7 +13,7 @@ var transporter = nodemailer.createTransport({
 
 module.exports = {
   sendWelcomeMail: function(user) {
-    const Email = new email({
+    const email = new Email({
       transport: transporter,
       send: true,
       preview: false,
@@ -21,16 +21,17 @@ module.exports = {
 
     // .send contains the message to be sent to the registered user and send the mail using nodemailer
 
-    Email.send({
-      template: 'Welcome',
-      message: {
-        to: 'sivasanjay7@gmail.com',
-        subject: 'Welcome to Visiit',
-      },
-      locals: {
-        name: user.first_name,
-      },
-    })
+    email
+      .send({
+        template: 'Welcome',
+        message: {
+          to: 'sivasanjay7@gmail.com',
+          subject: 'Welcome to Visiit',
+        },
+        locals: {
+          name: user.first_name,
+        },
+      })
       .then(info => {
         console.log('Email sent:' + info.response)
       })
