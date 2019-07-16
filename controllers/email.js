@@ -1,7 +1,12 @@
 const nodemailer = require('nodemailer')
 const Email = require('email-templates')
+const config = require('../config')
 
 // Storing the sender email details
+
+if (!config.email) {
+  console.error('please enter email creds in config file')
+}
 
 var transporter = nodemailer.createTransport({
   service: 'gmail',
