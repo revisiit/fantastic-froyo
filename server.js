@@ -53,6 +53,7 @@ app.get('/', (req, res) => {
 // Uncomment next line if you want to add dummy data to db
 // addDummyData()
 
-app.listen(3000, () => {
+const port = process.env.PORT || 3000
+app.listen(port, () => {
   console.log('Server running on http://127.0.0.1:3000')
 })
