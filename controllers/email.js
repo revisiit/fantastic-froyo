@@ -6,8 +6,8 @@ const Email = require('email-templates')
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'isha.venkatesh06@gmail.com',
-    pass: 'isha06$$',
+    user: 'haventcreatedoneyet@gmail.com',
+    pass: 'password',
   },
 })
 
