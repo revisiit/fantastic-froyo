@@ -11,8 +11,8 @@ if (!config.email) {
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'haventcreatedone@gmail.com',
-    pass: 'password',
+    user: config.email,
+    pass: config.password,
   },
 })
 
