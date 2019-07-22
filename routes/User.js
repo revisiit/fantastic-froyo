@@ -4,7 +4,7 @@ const middlewares = require('./middlewares')
 
 const router = Router()
 
-router.post('/', controller.postUser)
+router.post('/register', controller.postUser)
 
 router.post('/login', controller.login)
 

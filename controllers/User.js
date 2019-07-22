@@ -1,6 +1,7 @@
 const { User } = require('../models')
 const bcrypt = require('bcryptjs')
 const { filterUser, failure, success } = require('./helpers')
+const { sendWelcomeMail } = require('./email')
 
 exports.postUser = (req, res) => {
   var user = new User({
@@ -18,8 +19,11 @@ exports.postUser = (req, res) => {
       else user.password = hash
       user
         .save()
-        .then(() => {
-          res.send(success(filterUser(user.toObject())))
+        .then(user => {
+          req.session.userId = user._id
+          // res.send(success(filterUser(user.toObject())))
+          res.redirect('/api/v1')
+          sendWelcomeMail(user.toObject())
         })
         .catch(err => {
           res.send(failure(err))
