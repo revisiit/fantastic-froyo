@@ -47,7 +47,8 @@ app.use(middlewares.log)
 app.use('/api/v1', apiRoutes)
 
 app.get('/', (req, res) => {
-  res.send('Server functional. Go to /api/v1.')
+  // res.send('Server functional. Go to /api/v1.')
+  res.redirect('/api/v1')
 })
 
 // Uncomment next line if you want to add dummy data to db
