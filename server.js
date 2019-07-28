@@ -13,16 +13,6 @@ const app = express()
 // Connect to Mongo Database
 connect()
 
-// Enable Cross Origin Resource Sharing
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*')
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept',
-  )
-  next()
-})
-
 app.use(
   bodyParser.urlencoded({
     extended: true,
@@ -42,12 +32,23 @@ app.use(
   }),
 )
 
+// Enable Cross Origin Resource Sharing
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept',
+  )
+  next()
+})
+
 app.use(middlewares.log)
 
 app.use('/api/v1', apiRoutes)
 
 app.get('/', (req, res) => {
-  res.send('Server functional. Go to /api/v1.')
+  // res.send('Server functional. Go to /api/v1.')
+  res.redirect('/api/v1')
 })
 
 // Uncomment next line if you want to add dummy data to db
