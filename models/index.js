@@ -3,4 +3,5 @@ module.exports = {
   Package: require('./Package'),
   Itenary: require('./Itenary'),
   Category: require('./Category'),
+  Booking: require('./Booking'),
 }
