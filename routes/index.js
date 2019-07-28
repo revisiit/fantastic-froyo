@@ -4,6 +4,7 @@ const CategoryRouter = require('./Category')
 const UserRouter = require('./User')
 const ItenaryRouter = require('./Itenary')
 const SearchRouter = require('./Search')
+const BookingRouter = require('./Booking')
 const middlewares = require('./middlewares')
 
 const router = Router()
@@ -29,5 +30,7 @@ router.use('/user', UserRouter)
 router.use('/itenary', ItenaryRouter)
 
 router.use('/search', SearchRouter)
+
+router.use('/book', BookingRouter)
 
 module.exports = router
