@@ -1,12 +1,20 @@
 const mongoose = require('mongoose')
 const package = require('./Package')
+const user = require('./User')
+// const { User } = require('./index') Is this valid here ?
 const { Schema } = mongoose
 const BookingSchema = new Schema(
   {
-    packageid: {
+    Packageid: {
       type: Schema.ObjectId,
       ref: package,
     },
+
+    Userid: {
+      type: Schema.ObjectId,
+      ref: user,
+    },
+
     Name: {
       type: String,
       minlength: 3,

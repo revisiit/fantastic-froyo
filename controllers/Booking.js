@@ -6,8 +6,10 @@ exports.booking = (req, res) => {
   Package.findById(id)
     .select()
     .then(package => {
+      const userid = req.session.userId
       const packagebooked = new Booking({
-        packageid: id,
+        Packageid: id,
+        Userid: userid,
         Name: package.name,
       })
       packagebooked.save().then(bookeddetails => {

@@ -57,6 +57,7 @@ module.exports = {
     User.findById(userId)
       .then(user => {
         if (user) {
+          console.log(userId)
           next()
         } else {
           res.send('Log in to Book')
