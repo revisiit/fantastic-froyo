@@ -91,7 +91,7 @@ exports.postPackage = ({ body }, res) => {
       packagedetails
         .save()
         .then(() => {
-          res.send(success(packagedetials))
+          res.send(success(packagedetails))
         })
         .catch(err => {
           res.send(failure(err))

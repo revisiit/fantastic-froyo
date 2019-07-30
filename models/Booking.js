@@ -5,21 +5,19 @@ const user = require('./User')
 const { Schema } = mongoose
 const BookingSchema = new Schema(
   {
-    Packageid: {
-      type: Schema.ObjectId,
-      ref: package,
-    },
+    package: [
+      {
+        type: Schema.ObjectId,
+        ref: package,
+      },
+    ],
 
-    Userid: {
+    user: {
       type: Schema.ObjectId,
       ref: user,
     },
 
-    Name: {
-      type: String,
-      minlength: 3,
-      required: true,
-    },
+    time: { type: Date, default: Date.now },
   },
   { versionKey: false },
 )
