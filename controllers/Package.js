@@ -55,6 +55,7 @@ exports.getAllPackages = (req, res) => {
       name: 1,
       description: 1,
       images: 1,
+      slug: 1,
     })
     .then(allpackages => {
       res.send(allpackages)
