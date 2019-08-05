@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const package = require('./Package')
 const user = require('./User')
+const personschema = require('./Person').schema
 // const { User } = require('./index') Is this valid here ?
 const { Schema } = mongoose
 const BookingSchema = new Schema(
@@ -22,24 +23,7 @@ const BookingSchema = new Schema(
       required: true,
     },
 
-    person: [
-      {
-        title: {
-          type: String,
-          required: true,
-        },
-        first_name: {
-          type: String,
-          required: true,
-          minlength: 4,
-        },
-        last_name: {
-          type: String,
-          minlength: 4,
-          trim: true,
-        },
-      },
-    ],
+    person: [personschema],
 
     contactdetails: {
       first_name: {

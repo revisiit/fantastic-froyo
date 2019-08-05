@@ -14,13 +14,11 @@ exports.postBooking = (req, res) => {
             package: id,
             user: userid,
             dateoftravel: req.body.dateoftravel,
-            person: [
-              {
-                title: req.body.title,
-                first_name: user.first_name,
-                last_name: user.last_name,
-              },
-            ],
+            person: {
+              title: req.body.title,
+              first_name: user.first_name,
+              last_name: user.last_name,
+            },
             contactdetails: {
               first_name: user.first_name,
               last_name: user.last_name,

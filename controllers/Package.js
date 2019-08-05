@@ -79,7 +79,7 @@ exports.postPackage = ({ body }, res) => {
     duration: body.duration,
     activites: body.activites,
     images: body.images,
-    itenary: body.itenary,
+    itenaries: body.itenaries,
     categories: body.categories,
     inclusions: body.inclusions,
     exclusions: body.exclusions,

@@ -4,4 +4,5 @@ module.exports = {
   Itenary: require('./Itenary'),
   Category: require('./Category'),
   Booking: require('./Booking'),
+  Person: require('./Person'),
 }
