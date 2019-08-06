@@ -23,7 +23,12 @@ const BookingSchema = new Schema(
       required: true,
     },
 
-    person: [personschema],
+    person: [
+      {
+        type: Schema.ObjectId,
+        ref: personschema,
+      },
+    ],
 
     contactdetails: {
       first_name: {

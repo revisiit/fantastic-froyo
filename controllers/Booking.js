@@ -1,4 +1,4 @@
-const { Booking, Package, User } = require('../models')
+const { Booking, Package, User, Person } = require('../models')
 const { success, failure } = require('./helpers')
 
 exports.postBooking = (req, res) => {
@@ -10,32 +10,45 @@ exports.postBooking = (req, res) => {
       User.findById(userid)
         .select()
         .then(user => {
-          const packagebooked = new Booking({
-            package: id,
-            user: userid,
-            dateoftravel: req.body.dateoftravel,
-            person: {
+          const persondetails = new Person([
+            {
               title: req.body.title,
-              first_name: user.first_name,
-              last_name: user.last_name,
+              first_name: req.body.first_name,
+              last_name: req.body.last_name,
             },
-            contactdetails: {
-              first_name: user.first_name,
-              last_name: user.last_name,
-              phone: user.phone,
-              email: user.email,
-            },
-            billingaddress: {
-              address: req.body.address,
-              city: req.body.city,
-              postalcode: req.body.postalcode,
-              country: req.body.country,
-            },
-          })
-          packagebooked.save().then(bookeddetails => {
-            res.send(success(bookeddetails))
+          ])
+          persondetails.save().then(details => {
+            const packagebooked = new Booking({
+              package: id,
+              user: userid,
+              dateoftravel: req.body.dateoftravel,
+              person: [details._id],
+              contactdetails: {
+                first_name: user.first_name,
+                last_name: user.last_name,
+                phone: user.phone,
+                email: user.email,
+              },
+              billingaddress: {
+                address: req.body.address,
+                city: req.body.city,
+                postalcode: req.body.postalcode,
+                country: req.body.country,
+              },
+            })
+            packagebooked.save().then(bookeddetails => {
+              Person.find({ _id: { $in: bookeddetails.person } }).then(
+                person => {
+                  res.send({
+                    ...bookeddetails.toObject(),
+                    person,
+                  })
+                },
+              )
+            })
           })
         })
+
         .catch(err => {
           res.send(failure(err))
         })
