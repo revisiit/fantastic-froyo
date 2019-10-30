@@ -55,6 +55,7 @@ exports.getAllPackages = (req, res) => {
       name: 1,
       description: 1,
       images: 1,
+      slug: 1,
     })
     .then(allpackages => {
       res.send(allpackages)
@@ -78,7 +79,7 @@ exports.postPackage = ({ body }, res) => {
     duration: body.duration,
     activites: body.activites,
     images: body.images,
-    itenary: body.itenary,
+    itenaries: body.itenaries,
     categories: body.categories,
     inclusions: body.inclusions,
     exclusions: body.exclusions,
@@ -91,7 +92,7 @@ exports.postPackage = ({ body }, res) => {
       packagedetails
         .save()
         .then(() => {
-          res.send(success(packagedetials))
+          res.send(success(packagedetails))
         })
         .catch(err => {
           res.send(failure(err))

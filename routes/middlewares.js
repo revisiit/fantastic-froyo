@@ -51,6 +51,21 @@ module.exports = {
         res.send(err)
       })
   },
+
+  Loggedin: function(req, res, next) {
+    const { userId } = req.session
+    User.findById(userId)
+      .then(user => {
+        if (user) {
+          next()
+        } else {
+          res.send('Log in to Book')
+        }
+      })
+      .catch(err => {
+        res.send('Booking Failed')
+      })
+  },
 }
 
 // isAuthenticatinon
